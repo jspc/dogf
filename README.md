@@ -1,6 +1,10 @@
 dogfucker
 ==
 
+dogfucker is a web based text editor to emit data into kafka streams apps.
+
+It does sessions and shit.
+
 | who       | what |
 |-----------|------|
 | dockerhub | https://hub.docker.com/r/jspc/dogfucker/   |
@@ -32,4 +36,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
