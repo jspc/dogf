@@ -12,11 +12,20 @@ import (
 type Router struct {
 	SecureCookie *cookie.SecureCookie
 	DB           database
+	Renderer     Renderer
 }
 
 func NewRouter(hashKey, blockKey []byte, db string) (rr Router, err error) {
 	rr.SecureCookie = cookie.New(hashKey, blockKey)
 	rr.DB, err = NewDatabase(db)
+	if err != nil {
+		return
+	}
+
+	rr.Renderer, err = NewRenderer()
+	if err != nil {
+		return
+	}
 
 	return
 }
@@ -46,11 +55,19 @@ func (rr Router) login(w http.ResponseWriter, r *http.Request) {
 	loggedin, _, _ := rr.IsLoggedIn(r) // treat errors as not logged in
 
 	if r.Method == "GET" {
-		if loggedin {
-			fmt.Fprintf(w, "logged in")
-		} else {
-			fmt.Fprintf(w, "not logged in")
+		pageData := struct {
+			LoggedIn bool
+		}{
+			LoggedIn: loggedin,
 		}
+
+		body, err := rr.Renderer.Render("login", pageData)
+		if err != nil {
+			rr.fivehundred(w, err)
+
+			return
+		}
+		fmt.Fprintf(w, string(body))
 
 		return
 	}
@@ -70,6 +87,7 @@ func (rr Router) login(w http.ResponseWriter, r *http.Request) {
 		}
 
 		http.SetCookie(w, c)
+		http.Redirect(w, r, "/login", http.StatusFound)
 	}
 }
 
