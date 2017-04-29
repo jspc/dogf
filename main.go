@@ -13,9 +13,9 @@ var (
 )
 
 func main() {
-	log.Print("starting dogfucker")
+	log.Print("starting dogf")
 
-	r, err := NewRouter(HashKey, BlockKey, "postgres://postgres@database/dogfucker?sslmode=disable")
+	r, err := NewRouter(HashKey, BlockKey, "postgres://postgres@database/dogf?sslmode=disable")
 	if err != nil {
 		log.Panic(err)
 	}

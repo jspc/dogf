@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	CookieName = "dogfucker"
+	CookieName = "dogf"
 )
 
 type Cookie struct {

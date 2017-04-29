@@ -1,14 +1,14 @@
-dogfucker
+dogf
 ==
 
-dogfucker is a web based text editor to emit data into kafka streams apps.
+dogf is a web based text editor to emit data into kafka streams apps.
 
 It does sessions and shit.
 
 | who       | what |
 |-----------|------|
-| dockerhub | https://hub.docker.com/r/jspc/dogfucker/   |
-| circleci  | https://circleci.com/gh/jspc/dogfucker   |
+| dockerhub | https://hub.docker.com/r/jspc/dogf/   |
+| circleci  | https://circleci.com/gh/jspc/dogf   |
 | licence   | MIT   |
 
 
