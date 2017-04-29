@@ -96,7 +96,11 @@ func (rr Router) login(w http.ResponseWriter, r *http.Request) {
 
 		http.SetCookie(w, c)
 		http.Redirect(w, r, "/login", http.StatusFound)
+
+		return
 	}
+
+	rr.fourohfive(w, r.Method, r.URL)
 }
 
 func (rr Router) fourohfour(w http.ResponseWriter, u *url.URL) {
@@ -104,8 +108,13 @@ func (rr Router) fourohfour(w http.ResponseWriter, u *url.URL) {
 	fmt.Fprintf(w, "%q not found\n", u)
 }
 
+func (rr Router) fourohfive(w http.ResponseWriter, m string, u *url.URL) {
+	w.WriteHeader(http.StatusMethodNotAllowed)
+	fmt.Fprintf(w, "method %q not found on %q\n", m, u)
+}
+
 func (rr Router) fourohone(w http.ResponseWriter) {
-	w.WriteHeader(http.StatusNotFound)
+	w.WriteHeader(http.StatusUnauthorized)
 	fmt.Fprintf(w, "login failed\n")
 }
 
