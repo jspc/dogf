@@ -5,6 +5,8 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"os"
+	"path"
 
 	cookie "github.com/gorilla/securecookie"
 )
@@ -47,7 +49,13 @@ func (rr Router) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	case "/login":
 		rr.login(w, r)
 	default:
-		rr.fourohfour(w, r.URL)
+		potentialPath := path.Join("public", r.URL.Path)
+		_, err := os.Stat(potentialPath)
+		if os.IsNotExist(err) {
+			rr.fourohfour(w, r.URL)
+		} else {
+			http.ServeFile(w, r, potentialPath)
+		}
 	}
 }
 
